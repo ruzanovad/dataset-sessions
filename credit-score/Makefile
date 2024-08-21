@@ -23,7 +23,8 @@ run-experiment:
 .PHONY: clean
 clean:
 	@echo "Cleaning up..."
-	docker-compose down -v
+	@docker-compose down -v
+	rm -rf ./data
 
 # Help target to list all available commands
 .PHONY: help
