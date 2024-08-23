@@ -14,14 +14,14 @@ services:
       - "5432:5432"
 
   mlflow:
-    image: mlflow:latest
+    image: ghcr.io/mlflow/mlflow:v2.0.1
     container_name: mlflow_server
     environment:
       MLFLOW_TRACKING_URI: http://0.0.0.0:5000
     ports:
       - "5000:5000"
     volumes:
-      - ./mlruns:/mlflow/artifacts  # Store MLflow artifacts locally
+      - ./data/mlruns:/mlflow/artifacts  # Store MLflow artifacts locally
     command: >
       mlflow server 
       --backend-store-uri postgresql://mlflow_user:magic_password@postgres/mlflow_db
@@ -33,18 +33,18 @@ services:
     networks:
       - mlflow-network
 
-  python:
-    image: python:3.12-slim
-    container_name: mlflow_python
-    volumes:
-      - .:/app  # Mount your local directory to the container
-    working_dir: /app
-    networks:
-      - mlflow-network
-    environment:
-      MLFLOW_TRACKING_URI: http://mlflow_server:5000  # Communicate with MLflow server
-    depends_on:
-      - mlflow
+  # python:
+  #   image: python:3.12-slim
+  #   container_name: mlflow_python
+  #   volumes:
+  #     - .:/app  # Mount your local directory to the container
+  #   working_dir: /app
+  #   networks:
+  #     - mlflow-network
+  #   environment:
+  #     MLFLOW_TRACKING_URI: http://mlflow_server:5000  # Communicate with MLflow server
+  #   depends_on:
+  #     - mlflow
 
 networks:
   mlflow-network:
