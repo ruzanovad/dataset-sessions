@@ -1,0 +1,9 @@
+matplotlib==3.8.4
+mlflow==2.15.1
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+seaborn==0.13.2
+pickleshare==0.7.5
+ipykernel==6.29.5
+psycopg2==2.9.9
