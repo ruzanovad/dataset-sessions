@@ -4,7 +4,7 @@
 .PHONY: setup
 setup:
 	@echo "Setting up virtual environment and installing dependencies..."
-	@python3 -m venv venv
+	@python3 -m venv .venv
 	@venv/bin/pip install --upgrade pip wheel setuptools
 	@venv/bin/pip install -r requirements.txt
 
@@ -12,25 +12,25 @@ setup:
 .PHONY: activate
 activate:
 	@echo "Activating the virtual environment..."
-	@sh venv/bin/activate
+	@sh .venv/bin/activate
 
 # 3. Start MLflow server and dependencies using Docker Compose
 .PHONY: start
 start:
 	@echo "Starting MLflow server and dependencies..."
-	@sudo docker-compose up -d
+	@sudo docker compose up -d
 
 # 4. Stop all Docker services
 .PHONY: stop
 stop:
 	@echo "Stopping MLflow server and dependencies..."
-	@sudo docker-compose down -v
+	@sudo docker compose down -v
 
 # 5. Clean up environment (remove Docker volumes and virtual environment)
 .PHONY: clean
 clean:
 	@echo "Cleaning up environment..."
-	@sudo docker-compose down -v
+	@sudo docker compose down -v
 	@rm -rf data
 	@rm -rf venv
 
@@ -38,7 +38,7 @@ clean:
 .PHONY: run
 run:
 	@echo "Running MLflow server..."
-	@sudo docker-compose run mlflow
+	@sudo docker compose run mlflow
 
 # 7. Docker diagnosis: display container, volume, and image information
 .PHONY: diagnosis
