@@ -30,7 +30,7 @@ class DataFrameTransformer:
                 self.number_columns = self.number_columns.drop(col)
 
     def drop_redundant_columns(self):
-        self.delete_col(["Name", "Customer_ID", "SSN"])
+        self.delete_col(["Name", "ID", "SSN"])
 
     def transform_dtypes(self):
         problem_columns_float = [
@@ -138,8 +138,8 @@ class Credit_Dataset:
 
     def impute_all(self, model=KNNImputer(n_neighbors=1)):
 
-        if "ID" in self.train.columns:
-            self.train.drop("ID")
+        if "Customer_ID" in self.train.columns:
+            self.train.drop("Customer_ID")
         train_features = {
             "columns": self.train.columns,
             "index": self.train.index,
