@@ -5,8 +5,8 @@
 setup:
 	@echo "Setting up virtual environment and installing dependencies..."
 	@python3 -m venv .venv
-	@venv/bin/pip install --upgrade pip wheel setuptools
-	@venv/bin/pip install -r requirements.txt
+	@.venv/bin/pip install --upgrade pip wheel setuptools
+	@.venv/bin/pip install -r requirements.txt
 
 # 2. Activate the virtual environment
 .PHONY: activate
@@ -32,7 +32,7 @@ clean:
 	@echo "Cleaning up environment..."
 	@sudo docker compose down -v
 	@rm -rf data
-	@rm -rf venv
+	@rm -rf .venv
 
 # 6. Run MLflow server in a Docker container
 .PHONY: run
