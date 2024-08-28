@@ -24,13 +24,13 @@ start:
 .PHONY: stop
 stop:
 	@echo "Stopping MLflow server and dependencies..."
-	@sudo docker compose down -v
+	@sudo docker compose down --remove-orphans
 
 # 5. Clean up environment (remove Docker volumes and virtual environment)
 .PHONY: clean
 clean:
 	@echo "Cleaning up environment..."
-	@sudo docker compose down -v
+	@sudo docker compose down -v --remove-orphans
 	@rm -rf data
 	@rm -rf .venv
 
