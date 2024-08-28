@@ -4,8 +4,8 @@ services:
     container_name: mlflow_postgres
     env_file:
       - database.env # PG configure
-    # volumes:
-    #   - pgdata:/var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     networks:
       - mlflow-network
     ports:
@@ -20,8 +20,11 @@ services:
       MLFLOW_TRACKING_URI: http://0.0.0.0:5000
     ports:
       - "5000:5000"
+      - "8888:8888"
     volumes:
-      - ./data/mlruns:/mlflow/artifacts # Store MLflow artifacts locally
+      - ./data/mlflow:/app/mlflow_artifacts
+      # - ./eda:/app/eda
+      # - ./experiments:/app/experiments
     depends_on:
       - postgres
     networks:
@@ -30,7 +33,7 @@ services:
 networks:
   mlflow-network:
 
-# volumes:
-#   pgdata:
+volumes:
+  pgdata:
 # If you want to save your results, uncomment 
 # lines with "volume"

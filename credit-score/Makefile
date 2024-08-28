@@ -18,6 +18,7 @@ activate:
 .PHONY: start
 start:
 	@echo "Starting MLflow server and dependencies..."
+	@sudo docker compose build
 	@sudo docker compose up -d
 
 # 4. Stop all Docker services
