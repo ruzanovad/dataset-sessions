@@ -22,7 +22,8 @@ services:
       - "5000:5000"
       - "8888:8888"
     volumes:
-      - ./data/mlflow:/app/mlflow_artifacts
+      # - ./data/mlflow:/app/mlflow_artifacts
+      - ./data:/app/data
       # - ./eda:/app/eda
       # - ./experiments:/app/experiments
     depends_on:
