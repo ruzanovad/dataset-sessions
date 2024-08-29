@@ -19,3 +19,4 @@ dependencies:
       - pickleshare==0.7.5
       - psycopg2==2.9.9
       - kaggle
+      - catboost
