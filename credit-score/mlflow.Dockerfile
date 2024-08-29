@@ -1,16 +1,26 @@
-FROM ghcr.io/mlflow/mlflow:v2.15.1
+FROM continuumio/miniconda3:24.7.1-0
+
+WORKDIR /app
+
+ADD environment.yml /tmp/environment.yml
+ADD database.env database.env
 
 RUN apt-get update && \
-    apt-get install -y gcc libpq-dev && \
-    pip install psycopg2
+    apt-get install -y gcc libpq-dev unzip
+
+SHELL ["/bin/bash", "-c"]
+
+RUN conda env create -f /tmp/environment.yml \
+    && echo "source activate mlflow_env" > ~/.bashrc
+ENV PATH /opt/conda/envs/mlflow_env/bin:$PATH 
+
+EXPOSE 5000 8888
+# Expose Jupyter Notebook port
 
 
-ENV MLFLOW_TRACKING_URI=http://0.0.0.0:5000
+# Copy startup script into the container
+COPY start_services.sh /usr/local/bin/start_services.sh
+RUN chmod +x /usr/local/bin/start_services.sh
 
-EXPOSE 5000
-
-CMD ["mlflow", "server", \
-    "--backend-store-uri", "postgresql://mlflow_user:magical_password@postgres/mlflow_db", \
-    "--default-artifact-root", "/mlflow/artifacts", \
-    "--host", "0.0.0.0", \
-    "--port", "5000"]
+# Command to run the startup script
+CMD ["/usr/local/bin/start_services.sh"]
