@@ -10,7 +10,7 @@ dependencies:
   - scikit-learn
   - tqdm
   - pillow
-  - scikit-image
+  - scikit-image==1.2.2
   - streamlit
   - pip
   - pip:
