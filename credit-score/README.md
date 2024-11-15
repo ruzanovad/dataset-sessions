@@ -1,6 +1,6 @@
 # Credit Score Dataset Experiments
 
-This repository contains my experiments with the [Credit Score Classification dataset](https://www.kaggle.com/datasets/parisrohan/c redit-score-classification) and MLflow Tracking.
+This repository contains my experiments with the [Credit Score Classification dataset](https://www.kaggle.com/datasets/parisrohan/credit-score-classification) and MLflow Tracking.
 
 ## Project Structure
 
